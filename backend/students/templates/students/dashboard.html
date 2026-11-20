@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #e0f2fe, #eef2ff, #f0f9ff);
+            min-height: 100vh;
+            color: #1e293b;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(135deg, #0f172a, #1e40af, #0891b2);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 5px 20px rgba(15, 23, 42, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+        }
+
+        .logo h2 {
+            color: white;
+            font-size: 23px;
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .profile {
+            color: #e0f2fe;
+            font-size: 15px;
+        }
+
+        .logout-btn {
+            background: linear-gradient(135deg, #06b6d4, #2563eb);
+            color: white;
+            padding: 11px 25px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: linear-gradient(135deg, #2563eb, #06b6d4);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px #06b6d466;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1150px;
+            margin: 45px auto;
+            padding: 20px;
+        }
+
+        /* Welcome Section */
+        .welcome-box {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb, #0891b2);
+            padding: 45px;
+            border-radius: 20px;
+            color: white;
+            margin-bottom: 35px;
+            box-shadow: 0 10px 30px #1e40af30;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-box h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .welcome-box p {
+            color: #dbeafe;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .username {
+            color: #67e8f9;
+        }
+
+        .welcome-icon {
+            font-size: 65px;
+            position: absolute;
+            right: 50px;
+            top: 35px;
+            opacity: 0.8;
+        }
+
+        /* Section Heading */
+        .section-title {
+            font-size: 25px;
+            color: #1e3a8a;
+            margin-bottom: 25px;
+        }
+
+        /* Dashboard Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px 25px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px #0f172a12;
+            text-align: center;
+            transition: 0.3s;
+            border-bottom: 5px solid #06b6d4;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px #1e40af25;
+        }
+
+        .card-icon {
+            width: 75px;
+            height: 75px;
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-size: 35px;
+        }
+
+        .blue {
+            background: #dbeafe;
+        }
+
+        .purple {
+            background: #ede9fe;
+        }
+
+        .green {
+            background: #d1fae5;
+        }
+
+        .orange {
+            background: #ffedd5;
+        }
+
+        .card h3 {
+            color: #1e40af;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Information Section */
+        .info-box {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            margin-top: 35px;
+            box-shadow: 0 5px 20px #0f172a12;
+        }
+
+        .info-box h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .info-box p {
+            color: #64748b;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        .footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        .footer span {
+            color: #22d3ee;
+        }
+
+        /* Responsive Design */
+        @media(max-width: 600px) {
+
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .navbar-right {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .logo h2 {
+                font-size: 19px;
+            }
+
+            .welcome-box {
+                padding: 30px 22px;
+            }
+
+            .welcome-box h1 {
+                font-size: 25px;
+            }
+
+            .welcome-icon {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 22px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+
+        <div class="logo">
+            <div class="logo-icon">🎓</div>
+            <h2>Student Management System</h2>
+        </div>
+
+        <div class="navbar-right">
+
+            <div class="profile">
+                👤 {{ user.username }}
+            </div>
+
+            <form method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="logout-btn">
+                    Logout ↗
+                </button>
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- Main Dashboard -->
+    <div class="container">
+
+        <!-- Welcome Section -->
+        <div class="welcome-box">
+
+            <h1>
+                Welcome, <span class="username">{{ user.username }}</span>! 👋
+            </h1>
+
+            <p>
+                Welcome to your Student Management Dashboard.
+                Manage student information, registration and reports
+                easily from one place.
+            </p>
+
+            <div class="welcome-icon">📚</div>
+
+        </div>
+
+
+        <!-- Dashboard Section -->
+        <h2 class="section-title">📌 Dashboard Overview</h2>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="card-icon blue">
+                    👨‍🎓
+                </div>
+
+                <h3>Students</h3>
+
+                <p>
+                    Manage student details, personal information
+                    and academic records.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon purple">
+                    📝
+                </div>
+
+                <h3>Registration</h3>
+
+                <p>
+                    Register new students and maintain
+                    their registration details.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon green">
+                    📊
+                </div>
+
+                <h3>Reports</h3>
+
+                <p>
+                    View student records, academic details
+                    and generate reports.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon orange">
+                    ⚙️
+                </div>
+
+                <h3>Settings</h3>
+
+                <p>
+                    Manage your account and update
+                    your profile information.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Information Section -->
+        <div class="info-box">
+
+            <h2>✨ Dashboard Information</h2>
+
+            <p>
+                You have successfully logged into the Student
+                Management System. Use the dashboard to access
+                different student management features.
+                Have a productive day!
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+    <div class="footer">
+
+        <p>
+            © 2026 <span>Student Management System</span>
+            | All Rights Reserved
+        </p>
+
+    </div>
+
+</body>
+</html>

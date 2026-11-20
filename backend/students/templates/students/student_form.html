@@ -1,18 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Registration</title>
-</head>
-<body>
-    <h2>Student Registration</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="Submit">Registration</button>
 
-    </form>
-    
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e40af, #0891b2);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 15px;
+        }
+
+        /* Registration Container */
+        .registration-container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Heading */
+        .registration-container h2 {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .icon {
+            text-align: center;
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        /* Form Fields */
+        form p {
+            margin-bottom: 18px;
+        }
+
+        form label {
+            display: block;
+            color: #1e3a8a;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        form input,
+        form select,
+        form textarea {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 10px;
+            outline: none;
+            font-size: 15px;
+            background: #f8fafc;
+            color: #1e293b;
+            transition: 0.3s;
+        }
+
+        form input:focus,
+        form select:focus,
+        form textarea:focus {
+            border-color: #0891b2;
+            background: white;
+            box-shadow: 0 0 8px #06b6d455;
+        }
+
+        /* Error Messages */
+        .errorlist {
+            color: #dc2626;
+            font-size: 13px;
+            margin: 5px 0;
+            list-style: none;
+        }
+
+        /* Register Button */
+        .register-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #141e30, #00b4db);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 30px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .register-btn:hover {
+            background: linear-gradient(135deg, #00b4db, #141e30);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 18px #0891b255;
+        }
+
+        /* Login Link */
+        .login-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .login-link a {
+            color: #0891b2;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            color: #1e3a8a;
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media(max-width: 500px) {
+
+            .registration-container {
+                padding: 28px 20px;
+            }
+
+            .registration-container h2 {
+                font-size: 24px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="registration-container">
+
+        <div class="icon">🎓</div>
+
+        <h2>Student Registration</h2>
+
+        <p class="subtitle">
+            Create your student account
+        </p>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit" class="register-btn">
+                Register Now →
+            </button>
+
+        </form>
+
+        <div class="login-link">
+            Already have an account?
+            <a href="{% url 'login' %}">Login Here</a>
+        </div>
+
+    </div>
+
 </body>
 </html>
